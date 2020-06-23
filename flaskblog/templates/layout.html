@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename="main.css")}}">
+
+        {% if title %}
+
+
+          <title id="title">KAISMYRE - {{ title }}</title>
+        {% else %}
+          <title>KarmaIsMyReligion</title>
+        {% endif %}
+
+  </head>
+
+  <body >
+
+        <header class="site-header">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+          <div class="container-fluid">
+            <a class="navbar-brand ml-2" href="/">KarmaIsMyReligion</a>
+            <button class="navbar-toggler " type="button" data-toggle="collapse" data-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarToggle">
+              <div class="navbar-nav mr-auto">
+                <a class="nav-item nav-link" href="{{ url_for('main.home')}}">Home</a>
+              </div>
+              <!-- Navbar Right Side -->
+              <div class="navbar-nav">
+                {% if current_user.is_authenticated %}
+                <a class="nav-item nav-link" href="{{ url_for('users.account')}}">Account</a>
+                <a class="nav-item nav-link" href="{{ url_for('posts.new_post')}}">New Post</a>
+                <a class="nav-item nav-link" href="{{ url_for('users.logout')}}">Logout</a>
+                {% else %}
+                 <a class="nav-item nav-link" href="{{ url_for('users.login')}}">Login</a>
+                 <a class="nav-item nav-link" href="{{ url_for('users.register')}}">Register</a>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        </nav>
+        </header>
+        <main role="main" class="container">
+        <div class="row">
+          <div class="col-md-8">
+            {% with messages = get_flashed_messages(with_categories=true) %}
+             {% if messages %}
+              {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">
+                  {{ message }}
+                </div>
+              {% endfor %}
+             {% endif %}
+            {% endwith %}
+            {% block content %}{% endblock %}
+          </div>
+          <div class="col-md-4">
+            <div >
+              <p>
+                <ul class="list-group">
+                  <li class="list-group-item list-group-item-light">Latest News
+                    <!-- start sw-rss-feed code -->
+  <script type="text/javascript">
+  <!--
+  rssfeed_url = new Array();
+  rssfeed_url[0]="https://www.music-news.com/rss/UK/news?includeCover=true";
+  rssfeed_frame_width="305";
+  rssfeed_frame_height="420";
+  rssfeed_scroll="on";
+  rssfeed_scroll_step="6";
+  rssfeed_scroll_bar="off";
+  rssfeed_target="_blank";
+  rssfeed_font_size="12";
+  rssfeed_font_face="";
+  rssfeed_border="on";
+  rssfeed_css_url="https://feed.surfing-waves.com/css/style1.css";
+  rssfeed_title="on";
+  rssfeed_title_name="";
+  rssfeed_title_bgcolor="#3366ff";
+  rssfeed_title_color="#fff";
+  rssfeed_title_bgimage="";
+  rssfeed_footer="off";
+  rssfeed_footer_name="rss feed";
+  rssfeed_footer_bgcolor="#fff";
+  rssfeed_footer_color="#333";
+  rssfeed_footer_bgimage="";
+  rssfeed_item_title_length="50";
+  rssfeed_item_title_color="#666";
+  rssfeed_item_bgcolor="#fff";
+  rssfeed_item_bgimage="";
+  rssfeed_item_border_bottom="on";
+  rssfeed_item_source_icon="off";
+  rssfeed_item_date="off";
+  rssfeed_item_description="on";
+  rssfeed_item_description_length="120";
+  rssfeed_item_description_color="#666";
+  rssfeed_item_description_link_color="#333";
+  rssfeed_item_description_tag="off";
+  rssfeed_no_items="0";
+  rssfeed_cache = "ee4923191f522b9c54f3b4cc952b815e";
+  //-->
+  </script>
+  <script type="text/javascript" src="//feed.surfing-waves.com/js/rss-feed.js"></script>
+  <!-- The link below helps keep this service FREE, and helps other people find the SW widget. Please be cool and keep it! Thanks. -->
+  <div style="color:#ccc;font-size:10px; text-align:right; width:4430px;">powered by <a href="https://surfing-waves.com" rel="noopener" target="_blank" style="color:#ccc;">Surfing Waves</a></div>
+  <!-- end sw-rss-feed code --></li>
+
+
+                </ul>
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+
+
+
+    <!-- Java.Script -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+  </body>
+</html>
